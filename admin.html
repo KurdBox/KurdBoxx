@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KurdBox Admin</title>
+</head>
+
+<script>
+if (localStorage.getItem("admin") !== "true") {
+    window.location.href = "login.html";
+}
+</script>
+
+<h1>KurdBox Admin</h1>
+
+<form id="uploadForm">
+    <p>Movie Title</p>
+    <input type="text" id="title" required>
+	<p>Type</p>
+
+<select id="type" required>
+    <option value="Movie">Movie</option>
+    <option value="Series">Series</option>
+    <option value="Anime">Anime</option>
+</select>
+
+<p>Category</p>
+
+<input
+type="text"
+id="category"
+placeholder="Action, Comedy, Horror..."
+required>
+
+<p>Year</p>
+
+<input
+type="number"
+id="year"
+placeholder="2026"
+required>
+
+<p>Description</p>
+
+<textarea
+id="description"
+rows="4"
+placeholder="Movie description..."></textarea>
+
+    <p>Poster Image</p>
+    <input type="file" id="poster" accept="image/*" required>
+
+    <p>Movie File</p>
+    <input type="file" id="movie" accept="video/*" required>
+
+    <br><br>
+
+    <button type="submit">Upload Movie</button>
+</form>
+
+<hr>
+
+<h2>Uploaded Movies</h2>
+
+<div id="movieList"></div>
+
+<script src="admin.js"></script>
+
+</body>
+</html>

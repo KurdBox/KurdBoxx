@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>KurdBox Player</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="watch-page">
+<a href="index.html" class="back-btn">
+    ←زڤرین
+</a>
+
+    <img id="watchPoster" class="watch-poster">
+
+    <div class="watch-info">
+
+        <h1 id="watchTitle"></h1>
+
+        <p><strong>ژانەر:</strong> <span id="watchCategory"></span></p>
+
+        <p><strong>سال:</strong> <span id="watchYear"></span></p>
+
+        <p id="watchDescription"></p>
+
+    </div>
+
+    <video
+        id="videoPlayer"
+        controls
+        autoplay
+        width="100%">
+  </video>
+
+<h2 class="related-title">
+    🍿هەڤشێوە
+</h2>
+
+<div id="relatedMovies" class="movie-slider"></div>
+
+</div>
+
+<script>
+
+fetch("/movies")
+.then(res => res.json())
+.then(movies => {
+
+    const params = new URLSearchParams(window.location.search);
+
+    const movieFile = params.get("movie");
+
+    const movie = movies.find(m => m.movie === movieFile);
+
+    if(!movie){
+
+        document.body.innerHTML = "<h2>Movie not found</h2>";
+
+        return;
+
+    }
+
+ document.getElementById("watchTitle").textContent = movie.title;
+
+document.getElementById("watchCategory").textContent = movie.category;
+
+document.getElementById("watchYear").textContent = movie.year;
+
+document.getElementById("watchDescription").textContent = movie.description;
+
+document.getElementById("watchPoster").src =
+    "/posters/" + movie.poster;
+
+document.getElementById("videoPlayer").src =
+    "/uploads/" + movie.movie;
+
+const related = document.getElementById("relatedMovies");
+
+movies
+    .filter(m => m.movie !== movie.movie)
+    .slice(0, 8)
+    .forEach(item => {
+
+        const card = document.createElement("div");
+
+        card.className = "movie-card";
+
+        card.innerHTML = `
+            <img src="/posters/${item.poster}">
+            <h3>${item.title}</h3>
+        `;
+
+        card.onclick = () => {
+            location.href =
+                "watch.html?movie=" +
+                encodeURIComponent(item.movie);
+        };
+
+    related.appendChild(card);
+
+    });
+
+});
+
+</script>
+
+</body>
+
+</html>

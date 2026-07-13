@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KurdBox Admin Login</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <h2>Admin Login</h2>
+
+    <input
+        type="password"
+        id="password"
+        placeholder="Enter Admin Password">
+
+    <button onclick="login()">
+        Login
+    </button>
+
+</div>
+
+<script>
+
+function login(){
+
+    const password =
+        document.getElementById("password").value;
+
+    if(password==="123456"){
+
+        localStorage.setItem("admin","true");
+
+        window.location.href="admin.html";
+
+    }else{
+
+        alert("Wrong password!");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
