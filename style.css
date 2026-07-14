@@ -803,11 +803,11 @@ RESPONSIVE
 }
 .search-box{
     width:100%;
-    max-width:420px;
+    max-width:100%;
 }
 
 .search-box input{
-    width:170px;
+    width:100%;
 }
 
 .hero-content{
